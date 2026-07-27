@@ -141,3 +141,9 @@ python scraping/scrape_reviews.py
 Output: file `data/raw/com.lemon.lvoverseas.csv` berisi ulasan mentah (kolom `userName`, `score`, `content`, dll.) yang siap dipakai di tahap preprocessing R.
 
 ℹ️ `com.lemon.lvoverseas` adalah package ID resmi CapCut di Google Play Store (bukan nama aplikasi lain) — ByteDance mendaftarkan CapCut versi internasional dengan ID ini.
+
+### 3. Install dependensi R
+
+Jalankan skrip berikut di R/RStudio untuk menginstall seluruh package yang dibutuhkan:
+
+```
