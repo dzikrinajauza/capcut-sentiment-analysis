@@ -1,0 +1,55 @@
+# =================================================================
+# TAHAP 2: PEMBOBOTAN TF-IDF & MATRIKS DOKUMEN
+# Penelitian: Analisis Sentimen CapCut 2026 - Dzikrina Jauza Hasna
+# =================================================================
+
+# -----------------------------------------------------------------
+# 1. LOAD LIBRARY YANG DIBUTUHKAN
+# -----------------------------------------------------------------
+library(tidyverse)
+library(tidytext)
+library(tm)
+
+# -----------------------------------------------------------------
+# 2. LOAD DATA HASIL PREPROCESSING & LABELING (DARI TAHAP 1)
+# -----------------------------------------------------------------
+# Membaca kembali data bersih yang sudah kita simpan sebelumnya
+data_clean <- read.csv("Hasil_Preprocessing_dan_Labeling_Capcut_2026.csv", stringsAsFactors = FALSE)
+
+# Pastikan kolom ID bertipe faktor/karakter agar dibaca sebagai identitas dokumen
+data_clean <- data_clean %>% mutate(id = as.character(id))
+
+# -----------------------------------------------------------------
+# 3. TOKENISASI ULANG UNTUK PENGHITUNGAN TF-IDF
+# -----------------------------------------------------------------
+# Memecah teks content_clean menjadi kata-kata tunggal per baris dokumen
+ulasan_words <- data_clean %>%
+  select(id, content_clean, label) %>%
+  filter(content_clean != "") %>% # Membuang ulasan yang kosong setelah dibersihkan
+  unnest_tokens(word, content_clean) %>%
+  count(id, label, word, sort = TRUE) %>%
+  ungroup()
+
+# -----------------------------------------------------------------
+# 4. EKSEKUSI RUMUS MATEMATIS TF-IDF
+# -----------------------------------------------------------------
+# Rumus: tf-idf = (frekuensi kata di 1 ulasan) * log(total semua ulasan / jumlah ulasan yang mengandung kata itu)
+ulasan_tfidf <- ulasan_words %>%
+  bind_tf_idf(word, id, n)
+
+# Mengintip hasil pembobotan kata teratas
+print("Sampel Hasil Pembobotan TF-IDF:")
+print(head(ulasan_tfidf))
+
+# -----------------------------------------------------------------
+# 5. KONVERSI MENJADI MATRIKS (DOCUMENT-TERM MATRIX) UNTUK MACHINE LEARNING
+# -----------------------------------------------------------------
+# Mengubah struktur data dari memanjang (tidy) menjadi matriks lebar lebar (id x kata)
+dtm_tfidf <- ulasan_tfidf %>%
+  cast_dtm(id, word, tf_idf)
+
+# -----------------------------------------------------------------
+# 6. PENGECEKAN MATRIKS SEBELUM MASUK TAHAP SMOTE / MODELING
+# -----------------------------------------------------------------
+print("Dimensi Matriks Dokumen (Baris Ulasan x Kolom Kata Unik):")
+print(dim(dtm_tfidf))
