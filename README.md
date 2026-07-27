@@ -1,6 +1,6 @@
 # CapCut Review Sentiment Analysis 🎬
 
-### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Google Play Store, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
+#### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Google Play Store, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
 
 ![alt text](?raw=true)
 ![alt text](?raw=true)
@@ -42,6 +42,22 @@ Data dibagi 80% latih / 20% uji, lalu SMOTE (k=5) diterapkan pada data latih unt
 Naive Bayes dan SVM (Kernel Linear) dilatih menggunakan library e1071 dan caret.
 #### 7. Evaluation
 Performa dievaluasi menggunakan Confusion Matrix (Accuracy, Precision, Recall, F1-Score, Kappa Index).
+
+## 📊 Hasil Performa
+
+Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
+
+| Algoritma | Akurasi |	Kappa Index	| Status |
+|:---------:|:-------:|:-----------:|:------:|
+| Multinomial Naive Bayes |	85.60%	| 0.7840	| Layak |
+| SVM (Kernel Linear) |	91.26% |	0.8689	| Unggul |
+
+#### Insight utama:
+
+- SVM secara konsisten mengungguli Naive Bayes, sejalan dengan kemampuannya memetakan batas keputusan pada ruang fitur TF-IDF berdimensi tinggi.
+- Penerapan SMOTE meningkatkan kemampuan kedua model dalam mengenali kelas Netral tanpa indikasi overfitting.
+
+'📁 Detail lengkap metrik evaluasi (Precision/Recall per kelas, confusion matrix) tersedia di `results/evaluation_report.md`.'
 
 
 
