@@ -147,3 +147,12 @@ Output: file `data/raw/com.lemon.lvoverseas.csv` berisi ulasan mentah (kolom `us
 Jalankan skrip berikut di R/RStudio untuk menginstall seluruh package yang dibutuhkan:
 
 ```
+packages <- c("tidyverse", "tidytext", "e1071", "caret",
+              "smotefamily", "readxl", "writexl", "ggplot2")
+
+installed <- packages %in% rownames(installed.packages())
+if (any(!installed)) install.packages(packages[!installed])
+
+lapply(packages, library, character.only = TRUE)
+```
+
