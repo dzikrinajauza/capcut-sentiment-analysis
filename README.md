@@ -83,7 +83,6 @@ cd capcut-sentiment-analysis
 Tahap ini menghasilkan dataset mentah (`.csv`) yang akan diproses oleh pipeline R. Dijalankan di VS Code (bisa lewat Git Bash/terminal + Jupyter cell, atau langsung `python`).
 
 #### Install dependensi:
-bash
-```pip install google-play-scraper pandas
-```
+
+```pip install google-play-scraper pandas```
 
