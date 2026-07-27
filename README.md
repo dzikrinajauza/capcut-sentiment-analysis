@@ -74,7 +74,8 @@ Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
 
 ### 1. Clone repositori
 
-```git clone https://github.com/username/capcut-sentiment-analysis.git
+```
+git clone https://github.com/username/capcut-sentiment-analysis.git
 cd capcut-sentiment-analysis
 ```
 
@@ -84,5 +85,7 @@ Tahap ini menghasilkan dataset mentah (`.csv`) yang akan diproses oleh pipeline 
 
 #### Install dependensi:
 
-```pip install google-play-scraper pandas```
+```
+pip install google-play-scraper pandas
+```
 
