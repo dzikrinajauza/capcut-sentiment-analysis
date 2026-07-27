@@ -78,3 +78,12 @@ Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
 cd capcut-sentiment-analysis
 ```
 
+### 2. Jalankan scraping data (Python)
+
+Tahap ini menghasilkan dataset mentah (`.csv`) yang akan diproses oleh pipeline R. Dijalankan di VS Code (bisa lewat Git Bash/terminal + Jupyter cell, atau langsung `python`).
+
+#### Install dependensi:
+bash
+```pip install google-play-scraper pandas
+```
+
