@@ -57,7 +57,7 @@ Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
 - SVM secara konsisten mengungguli Naive Bayes, sejalan dengan kemampuannya memetakan batas keputusan pada ruang fitur TF-IDF berdimensi tinggi.
 - Penerapan SMOTE meningkatkan kemampuan kedua model dalam mengenali kelas Netral tanpa indikasi overfitting.
 
-'📁 Detail lengkap metrik evaluasi (Precision/Recall per kelas, confusion matrix) tersedia di `results/evaluation_report.md`.'
+📁 Detail lengkap metrik evaluasi (Precision/Recall per kelas, confusion matrix) tersedia di `results/evaluation_report.md`.
 
 
 
