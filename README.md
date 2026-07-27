@@ -59,5 +59,22 @@ Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
 
 📁 Detail lengkap metrik evaluasi (Precision/Recall per kelas, confusion matrix) tersedia di `results/evaluation_report.md`.
 
+## 🛠️ Tech Stack
 
+| Komponen | Tools |
+|:---------|:------|
+| Data Scraping	| Python 3.x, `google-play-scraper`, `pandas` |
+| Analisis & Modeling	| R (≥ 4.0) |
+| Manipulasi Data & NLP (R)	| `tidyverse`, `tidytext` |
+| Machine Learning (R)	| `e1071`, `caret` |
+| Balancing |	`DMwR` / `smotefamily` |
+| Visualisasi	| `ggplot2` |
+
+## 🚀 Cara Menjalankan Kode
+
+### 1. Clone repositori
+
+```git clone https://github.com/username/capcut-sentiment-analysis.git
+cd capcut-sentiment-analysis
+```
 
