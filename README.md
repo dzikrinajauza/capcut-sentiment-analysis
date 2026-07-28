@@ -2,8 +2,8 @@
 
 #### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Google Play Store, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
 
-![alt text](?raw=true)
-![alt text](?raw=true)
+![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/1.png?raw=true)
+![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/2.png?raw=true)
 
 ## 📌 Ringkasan Proyek
 
@@ -24,7 +24,7 @@ Proyek ini menjawab tantangan tersebut dengan pipeline otomatis yang tidak hanya
 
 ## 🔄 Alur Kerja (Data Pipeline)
 
-![alt text](?raw=true)
+![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/3.png?raw=true)
 
 ### Tahapan detail:
 
