@@ -155,4 +155,154 @@ if (any(!installed)) install.packages(packages[!installed])
 
 lapply(packages, library, character.only = TRUE)
 ```
+### 4. Jalankan pipeline analisis (R) secara berurutan
+
+```
+Rscript scripts/01_data_cleaning.R
+Rscript scripts/02_tfidf.R
+Rscript scripts/03_smote.R
+Rscript scripts/04_modeling_evaluasi.R
+```
+Atau buka `capcut-sentiment.Rproj` di RStudio, lalu jalankan tiap file `.R` per bagian (chunk) untuk eksplorasi interaktif.
+
+## 📥 Tutorial: Memasukkan Berkas Analisis Data (.R, .csv, .xlsx, dll.)
+
+Bagian ini menjelaskan cara menambahkan berkas data dan skrip ke dalam repositori dengan benar, baik lewat GitHub Desktop/web maupun command line.
+
+### A. Menyiapkan folder yang tepat
+
+Sebelum upload, tentukan lokasi berkas sesuai jenisnya:
+
+| Jenis Berkas	| Lokasi | Contoh |
+|:-------------|:-------|:-------|
+| Skrip Python (`.py`) |	`scraping/` | `scrape_reviews.py` |
+| Skrip R (`.R`, `.Rmd`) |	`scripts/`	| `04_modeling_evaluasi.R` |
+| Data mentah (`.csv`, `.json`) |	`data/raw/` | `ulasan_capcut.csv` |
+| Data hasil olahan (`.csv`, `.rds`, `.xlsx`) | `data/processed/` | `Data_Capcut_Balanced_SMOTE.rds` |
+| Laporan/hasil (`.md`, `.pdf`, `.png`)	| `results/`	| `evaluation_report.md` |
+
+### B. Upload lewat GitHub Web (paling mudah, tanpa command line)
+
+1. Buka repositori di GitHub, masuk ke folder tujuan (misalnya `data/raw/`).
+2. Klik tombol Add file → Upload files.
+3. Drag-and-drop berkas `.R`, `.csv`, `.xlsx`, atau `.json` yang ingin diunggah.
+4. Isi kolom commit message, misalnya: `Add raw scraping data (5000 reviews)`.
+5. Klik Commit changes.
+
+### C. Upload lewat Git command line (git bash) (direkomendasikan untuk kolaborasi tim)
+
+```
+# 1. Pastikan berkas sudah berada di folder yang sesuai
+cp ulasan_capcut.csv data/raw/
+cp 03_smote.R scripts/
+
+# 2. Cek status perubahan
+git status
+
+# 3. Tambahkan berkas ke staging area
+git add data/raw/ulasan_capcut.csv scripts/03_smote.R
+
+# 4. Commit dengan pesan yang jelas
+git commit -m "Add raw dataset and SMOTE script"
+
+# 5. Push ke GitHub
+git push origin main
+```
+
+### D. Catatan khusus untuk setiap format
+
+`.csv`
+- Gunakan encoding UTF-8 agar karakter bahasa Indonesia (termasuk emoji/bahasa gaul) tidak rusak.
+- Dibaca di R dengan:
+```
+library(readr)
+  df <- read_csv("data/raw/capcut_reviews_raw.csv")
+```
+
+`.xlsx`
+- Gunakan package readxl untuk membaca dan writexl untuk menulis, agar tidak bergantung pada instalasi Excel/Java (berbeda dengan xlsx package).
+```
+library(readxl)
+  df <- read_excel("data/processed/labeled_data.xlsx", sheet = 1)
+
+  library(writexl)
+  write_xlsx(df, "data/processed/labeled_data.xlsx")
+```
+
+`.py`
+
+- Sertakan requirements.txt di folder scraping/ agar dependensi Python mudah diinstal ulang oleh orang lain:
+```
+  google-play-scraper
+  pandas
+```
+
+- Install dengan: `pip install -r scraping/requirements.txt`
+
+`.R / .Rmd`
+
+- Pastikan setiap skrip diberi header komentar berisi tujuan, input, dan output skrip, contoh:
+
+```
+  # ============================================
+  # Script  : 03_smote.R
+  # Tujuan  : Balancing kelas minoritas (Netral) dengan SMOTE
+  # Input   : data/processed/tfidf_matrix.rds
+  # Output  : data/processed/Data_Capcut_Balanced_SMOTE.rds
+  # ============================================
+```
+
+`.rds` (format native R, dipakai untuk simpan objek seperti matriks TF-IDF atau data hasil SMOTE)
+
+- Lebih efisien daripada .csv untuk objek R kompleks (matriks sparse, list, model terlatih) karena mempertahankan struktur data asli.
+
+```
+  # Menyimpan
+  saveRDS(df_balanced, "data/processed/Data_Capcut_Balanced_SMOTE.rds")
+
+  # Membaca
+  df_balanced <- readRDS("data/processed/Data_Capcut_Balanced_SMOTE.rds")
+```
+
+- Catatan: file .rds bersifat biner dan tidak bisa dibaca langsung di GitHub preview (berbeda dari .csv). Jika ukurannya besar, pertimbangkan Git LFS (lihat poin di bawah).
+
+
+#### Berkas besar (> 50MB, misalnya dataset scraping mentah dalam jumlah besar)
+
+- Hindari commit langsung; gunakan Git LFS:
+
+```
+  git lfs install
+  git lfs track "*.csv"
+  git add .gitattributes
+  git add data/raw/large_dataset.csv
+  git commit -m "Track large CSV with Git LFS"
+  git push origin main
+```
+
+### E. Tambahkan .gitignore untuk file yang tidak perlu di-track
+
+```
+gitignore
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Data sementara / cache
+data/temp/
+*.tmp
+
+# File sistem
+.DS_Store
+Thumbs.db
+```
+
+
 
