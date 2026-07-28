@@ -300,15 +300,15 @@ data/temp/
 *.tmp
 ```
 
-# 🧪 Reproduksibilitas
+## 🧪 Reproduksibilitas
 
 Seluruh proses acak (data splitting, SMOTE) menggunakan set.seed(123) di setiap skrip agar hasil dapat direproduksi secara konsisten oleh siapa pun yang menjalankan pipeline ini.
 
-# 📄 Lisensi
+## 📄 Lisensi
 
 Proyek ini dirilis di bawah lisensi MIT — bebas digunakan untuk keperluan riset dan pembelajaran dengan mencantumkan atribusi.
 
-# 🙋 Author
+## 🙋 Author
 
 [Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauza@example.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ ·
 
