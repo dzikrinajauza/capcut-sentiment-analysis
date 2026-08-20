@@ -1,6 +1,6 @@
 # CapCut Review Sentiment Analysis 🎬
 
-#### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Google Play Store, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
+#### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Aplikasi Capcut, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
 
 ![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/1.png?raw=true)
 ![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/2.png?raw=true)
