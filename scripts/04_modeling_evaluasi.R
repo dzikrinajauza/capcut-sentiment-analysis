@@ -10,6 +10,8 @@ library(tidyverse)
 library(caret)       # Library utama untuk split data & confusion matrix
 library(e1071)       # Library untuk algoritma SVM
 library(naivebayes)  # Library khusus untuk Multinomial Naive Bayes yang valid
+library(ggplot2)
+
 
 # -----------------------------------------------------------------
 # 2. LOAD DATA SEIMBANG (HASIL SMOTE TAHAP 3)
@@ -63,3 +65,52 @@ cat("\n=========================================\n")
 cat("           HASIL EVALUASI SVM            ")
 cat("\n=========================================\n")
 print(confusionMatrix(pred_svm, test_data$label))
+
+# -----------------------------------------------------------------
+# 6. VISUALISASI SEBARAN DATA SVM DENGAN PCA (2 DIMENSI)
+# -----------------------------------------------------------------
+
+# 1. Memeras ratusan kolom kata menjadi 2 sumbu utama (PC1 dan PC2)
+print("Membersihkan kolom bervarians nol sebelum PCA...")
+
+# Deteksi kolom mana saja yang variansnya 0 (isinya sama semua)
+zero_var_cols <- which(apply(X_train, 2, var) == 0)
+
+# Buat salinan X_train khusus untuk grafik PCA agar X_train asli tidak rusak
+if(length(zero_var_cols) > 0) {
+  X_train_pca <- X_train[, -zero_var_cols]
+  cat("Ada", length(zero_var_cols), "kolom kata yang dibuang untuk grafik PCA.\n")
+} else {
+  X_train_pca <- X_train
+}
+
+# Jalankan ulang PCA menggunakan data yang sudah bersih
+pca_result <- prcomp(X_train_pca, scale. = TRUE)
+
+# 2. Membuat dataframe baru khusus untuk grafik
+data_grafik <- data.frame(
+  PC1 = pca_result$x[, 1],
+  PC2 = pca_result$x[, 2],
+  Sentimen = Y_train
+)
+
+# 3. Menggambar plot (Scatter Plot) dengan Zoom-in (Filter Outlier Visual)
+# Saya memperkirakan batas PC1: 0 s/d 60 dan PC2: -60 s/d 60 berdasarkan gambar Anda.
+grafik_svm_zoom <- ggplot(data_grafik, aes(x = PC1, y = PC2, color = Sentimen)) +
+  geom_point(alpha = 0.6, size = 2) +
+  stat_ellipse(linewidth = 1) + 
+  scale_color_manual(values = c("Positif" = "blue", "Netral" = "gray", "Negatif" = "red")) +
+  
+  # KUNCI ZOOM: Tentukan batas sumbu yang akan ditampilkan
+  # Sesuaikan angka ini jika perlu
+  scale_x_continuous(limits = c(0, 40)) + # Menampilkan PC1 dari 0 s/d 60
+  scale_y_continuous(limits = c(-40, 40)) + # Menampilkan PC2 dari -60 s/d 60
+  
+  theme_minimal() +
+  labs(title = "Visualisasi Persebaran Sentimen CapCut (Zoomed-in PCA 2D)",
+       subtitle = "Data telah difilter secara visual (limits) untuk detail kelompok utama",
+       x = "Komponen Utama 1 (PC1)",
+       y = "Komponen Utama 2 (PC2)")
+
+# Perintah wajib untuk menampilkan grafik ke tab Plots
+print(grafik_svm_zoom)
