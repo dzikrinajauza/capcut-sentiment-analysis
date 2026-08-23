@@ -1,13 +1,13 @@
 # CapCut Review Sentiment Analysis 🎬
 
-#### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Google Play Store, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
+#### Analisis Komparatif Naive Bayes vs. Support Vector Machine untuk Klasifikasi Sentimen Ulasan Aplikasi Capcut, dengan Penanganan Class Imbalance menggunakan SMOTE dan TF-IDF
 
-![alt text](?raw=true)
-![alt text](?raw=true)
+![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/1.png?raw=true)
+![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/2.png?raw=true)
 
 ## 📌 Ringkasan Proyek
 
-Proyek ini membangun pipeline analisis sentimen dua tahap: Python digunakan untuk mengambil data ulasan mentah dari Google Play Store (via google-play-scraper), dan R digunakan untuk keseluruhan proses analisis — preprocessing teks, pelabelan, ekstraksi fitur, hingga klasifikasi sentimen (Positif / Negatif / Netral) dari ulasan pengguna aplikasi CapCut. Dua algoritma klasifikasi — Multinomial Naive Bayes dan Support Vector Machine (Kernel Linear) — dibandingkan performanya setelah data diproses melalui pembobotan TF-IDF dan penyeimbangan kelas menggunakan SMOTE.
+Proyek ini membangun pipeline analisis sentimen dua tahap: Python digunakan untuk mengambil data ulasan mentah dari Google Play Store (via `google-play-scraper`), dan R digunakan untuk keseluruhan proses analisis — preprocessing teks, pelabelan, ekstraksi fitur, hingga klasifikasi sentimen (Positif / Negatif / Netral) dari ulasan pengguna aplikasi CapCut. Dua algoritma klasifikasi — Multinomial Naive Bayes dan Support Vector Machine (Kernel Linear) — dibandingkan performanya setelah data diproses melalui pembobotan TF-IDF dan penyeimbangan kelas menggunakan SMOTE.
 
 Proyek ini relevan sebagai studi kasus text mining pada data ulasan berbahasa Indonesia yang tidak baku (bahasa gaul, singkatan, typo), sekaligus mendemonstrasikan penanganan masalah class imbalance yang umum terjadi pada dataset ulasan aplikasi dunia nyata.
 
@@ -24,12 +24,12 @@ Proyek ini menjawab tantangan tersebut dengan pipeline otomatis yang tidak hanya
 
 ## 🔄 Alur Kerja (Data Pipeline)
 
-![alt text](?raw=true)
+![alt text](https://github.com/dzikrinajauza/capcut-sentiment-analysis/blob/main/assets/3.png?raw=true)
 
 ### Tahapan detail:
 
 #### 1. Data Scraping (Python)
-   Ulasan mentah diambil dari Google Play Store menggunakan library google-play-scraper, dengan app_id = com.lemon.lvoverseas (ID resmi aplikasi CapCut di Play Store). Atribut yang diambil meliputi userName, score, content, dan metadata lain, lalu disimpan sebagai .csv.
+   Ulasan mentah diambil dari Google Play Store menggunakan library `google-play-scraper`, dengan `app_id = com.lemon.lvoverseas` (ID resmi aplikasi CapCut di Play Store). Atribut yang diambil meliputi `userName`, `score`, `content`, dan metadata lain, lalu disimpan sebagai `.csv`.
 #### 2. Text Preprocessing (R)
 Case folding → cleaning (URL, emoji, tanda baca) → normalisasi kata gaul/singkatan → tokenizing → stopword removal → stemming (kamus Katadasar).
 #### 3. Pelabelan Hibrida 
@@ -39,7 +39,7 @@ Representasi teks bersih diubah menjadi matriks numerik berbobot.
 #### 5. Data Splitting & SMOTE 
 Data dibagi 80% latih / 20% uji, lalu SMOTE (k=5) diterapkan pada data latih untuk menyeimbangkan kelas minoritas (Netral).
 #### 6. Model Training
-Naive Bayes dan SVM (Kernel Linear) dilatih menggunakan library e1071 dan caret.
+Naive Bayes dan SVM (Kernel Linear) dilatih menggunakan library `e1071` dan `caret`.
 #### 7. Evaluation
 Performa dievaluasi menggunakan Confusion Matrix (Accuracy, Precision, Recall, F1-Score, Kappa Index).
 
@@ -56,8 +56,6 @@ Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
 
 - SVM secara konsisten mengungguli Naive Bayes, sejalan dengan kemampuannya memetakan batas keputusan pada ruang fitur TF-IDF berdimensi tinggi.
 - Penerapan SMOTE meningkatkan kemampuan kedua model dalam mengenali kelas Netral tanpa indikasi overfitting.
-
-📁 Detail lengkap metrik evaluasi (Precision/Recall per kelas, confusion matrix) tersedia di `results/evaluation_report.md`.
 
 ## 🛠️ Tech Stack
 
