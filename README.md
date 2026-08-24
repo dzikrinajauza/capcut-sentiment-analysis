@@ -308,7 +308,7 @@ Proyek ini dirilis di bawah lisensi MIT — bebas digunakan untuk keperluan rise
 
 ## 🙋 Author
 
-[Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauza@example.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ ·
+[Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauza@gmail.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ ·
 
 
 
