@@ -73,7 +73,7 @@ Hasil evaluasi model pada data uji (pasca-SMOTE, total 8.931 baris):
 ### 1. Clone repositori
 
 ```
-git clone https://github.com/username/capcut-sentiment-analysis.git
+git clone [https://github.com/username/capcut-sentiment-analysis.git](https://github.com/dzikrinajauza/capcut-sentiment-analysis.git)
 cd capcut-sentiment-analysis
 ```
 
